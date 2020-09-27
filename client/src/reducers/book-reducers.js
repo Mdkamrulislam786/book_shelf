@@ -4,7 +4,7 @@ import {
   CLEAR_W_REVIEWER,
   ADD_BOOK,
   CLEAR_NEWBOOK,
-  GET_USER_POSTS,
+ 
 } from "../actions/type";
 
 export default function (state = {}, action) {
@@ -13,6 +13,11 @@ export default function (state = {}, action) {
       return {
         ...state,
         list: action.payload,
+      };
+    case "GET_BOOK":
+      return {
+        ...state,
+        book: action.payload,
       };
     case GET_BOOK_W_REVIEWER:
       return {
@@ -36,11 +41,25 @@ export default function (state = {}, action) {
         ...state,
         newBook: action.payload,
       };
-    case GET_USER_POSTS:
+    case "UPDATE_BOOK":
       return {
         ...state,
-        userPosts: action.payload,
+        updateBook: action.payload.success,
+        book: action.payload.doc,
       };
+    case "DELETE_BOOK":
+      return {
+        ...state,
+        postDeleted: action.payload,
+      };
+    case "CLEAR_BOOK":
+      return {
+        ...state,
+        updateBook: action.payload.updateBook,
+        book: action.payload.book,
+        postDeleted: action.payload.postDeleted,
+      };
+
     default:
       return state;
   }

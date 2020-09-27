@@ -5,7 +5,7 @@ import moment from "moment-js";
 import { Link } from "react-router-dom";
 
 class UserPosts extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.dispatch(getUserPosts(this.props.user.login.id));
   }
 
@@ -24,6 +24,7 @@ class UserPosts extends Component {
 
   render() {
     let user = this.props.user;
+    console.log(user);
     return (
       <div className="user_posts">
         <h4>Your reviews:</h4>
@@ -41,6 +42,7 @@ class UserPosts extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     user: state.user,
