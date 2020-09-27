@@ -7,6 +7,8 @@ import BookView from "./Components/Books";
 import Login from "./Containers/Admin/Login";
 import User from "./Components/Admin";
 import Auth from "./Hoc/Layout/Auth";
+import AddReview from "./Containers/Admin/Add";
+import UserPosts from "./Components/Admin/UserPosts";
 
 const Routes = () => {
   return (
@@ -14,8 +16,14 @@ const Routes = () => {
       <Switch>
         <Route path="/" exact component={Auth(Home, null)} />
         <Route path="/login" exact component={Auth(Login, false)} />
-        <Route path="/books/:id" exact component={Auth(BookView)} />
         <Route path="/user" exact component={Auth(User, true)} />
+        <Route path="/user/add" exact component={Auth(AddReview, true)} />
+        <Route
+          path="/user/user-reviews"
+          exact
+          component={Auth(UserPosts, true)}
+        />
+        <Route path="/books/:id" exact component={Auth(BookView, null)} />
       </Switch>
     </Layout>
   );

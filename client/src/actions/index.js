@@ -4,6 +4,9 @@ import {
   CLEAR_W_REVIEWER,
   USER_LOGIN,
   USER_AUTH,
+  ADD_BOOK,
+  CLEAR_NEWBOOK,
+  GET_USER_POSTS
 } from "./type";
 import axios from "axios";
 
@@ -57,6 +60,24 @@ export const clearBookWithReviewer = () => {
   };
 };
 
+export function addBook(book) {
+  const request = axios
+    .post("/api/book", book)
+    .then((response) => response.data);
+
+  return {
+    type: ADD_BOOK,
+    payload: request,
+  };
+}
+
+export function clearNewBook() {
+  return {
+    type: CLEAR_NEWBOOK,
+    payload: {},
+  };
+}
+
 //******USERS******//
 
 export function loginUser({ email, password }) {
@@ -76,6 +97,17 @@ export function auth() {
 
   return {
     type: USER_AUTH,
+    payload: request,
+  };
+}
+
+export function getUserPosts(userId) {
+  const request = axios
+    .get(`/api/user_posts?user=${userId}`)
+    .then((response) => response.data);
+
+  return {
+    type: GET_USER_POSTS,
     payload: request,
   };
 }

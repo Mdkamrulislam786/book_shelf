@@ -2,6 +2,9 @@ import {
   GET_BOOKS,
   GET_BOOK_W_REVIEWER,
   CLEAR_W_REVIEWER,
+  ADD_BOOK,
+  CLEAR_NEWBOOK,
+  GET_USER_POSTS,
 } from "../actions/type";
 
 export default function (state = {}, action) {
@@ -22,6 +25,21 @@ export default function (state = {}, action) {
         ...state,
         book: action.payload.book,
         reviewer: action.payload.reviewer,
+      };
+    case ADD_BOOK:
+      return {
+        ...state,
+        newBook: action.payload,
+      };
+    case CLEAR_NEWBOOK:
+      return {
+        ...state,
+        newBook: action.payload,
+      };
+    case GET_USER_POSTS:
+      return {
+        ...state,
+        userPosts: action.payload,
       };
     default:
       return state;
