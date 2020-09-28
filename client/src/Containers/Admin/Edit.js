@@ -65,7 +65,7 @@ class EditBook extends PureComponent {
     });
   }
 
-  UNSAFE_componentWillUnmount() {
+  componentWillUnmount() {
     this.props.dispatch(clearBook());
   }
 

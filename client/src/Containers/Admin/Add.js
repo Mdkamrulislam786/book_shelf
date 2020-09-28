@@ -49,6 +49,7 @@ class AddBook extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="rl_container article">
         <form onSubmit={this.submitForm}>

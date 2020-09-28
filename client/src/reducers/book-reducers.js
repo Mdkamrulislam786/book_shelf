@@ -4,7 +4,6 @@ import {
   CLEAR_W_REVIEWER,
   ADD_BOOK,
   CLEAR_NEWBOOK,
- 
 } from "../actions/type";
 
 export default function (state = {}, action) {
