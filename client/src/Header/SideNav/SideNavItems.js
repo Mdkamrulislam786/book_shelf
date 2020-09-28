@@ -1,8 +1,8 @@
 import React from "react";
 import FontAwesome from "react-fontawesome";
 import { Link } from "react-router-dom";
-
-const SideNavItems = () => {
+import { connect } from "react-redux";
+const SideNavItems = ({ user }) => {
   const items = [
     {
       type: "navItem",
@@ -16,14 +16,14 @@ const SideNavItems = () => {
       icon: "file-text-o",
       text: "MyProfile",
       link: "/user",
-      restricted: false,
+      restricted: true,
     },
     {
       type: "navItem",
       icon: "file-text-o",
       text: "Add Admins",
       link: "/user/register",
-      restricted: false,
+      restricted: true,
     },
     {
       type: "navItem",
@@ -31,27 +31,28 @@ const SideNavItems = () => {
       text: "Login",
       link: "/login",
       restricted: false,
+      exclude: true,
     },
     {
       type: "navItem",
       icon: "file-text-o",
       text: "My Reviews",
       link: "/user/user-reviews",
-      restricted: false,
+      restricted: true,
     },
     {
       type: "navItem",
       icon: "file-text-o",
       text: "Add Reviews",
       link: "/user/add",
-      restricted: false,
+      restricted: true,
     },
     {
       type: "navItem",
       icon: "file-text-o",
       text: "Logout",
       link: "/user/logout",
-      restricted: false,
+      restricted: true,
     },
   ];
   const element = (item, i) => (
@@ -62,11 +63,22 @@ const SideNavItems = () => {
     </div>
   );
   const showItems = () => {
-    return items.map((item, i) => {
-      return element(item, i);
-    });
+    return user.login
+      ? items.map((item, i) => {
+          if (user.login.isAuth) {
+            return !item.exclude ? element(item, i) : null;
+          } else {
+            return !item.restricted ? element(item, i) : null;
+          }
+        })
+      : null;
   };
   return <div>{showItems()}</div>;
 };
 
-export default SideNavItems;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(SideNavItems);

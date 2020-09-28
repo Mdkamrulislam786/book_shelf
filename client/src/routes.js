@@ -10,6 +10,8 @@ import Auth from "./Hoc/Layout/Auth";
 import AddReview from "./Containers/Admin/Add";
 import UserPosts from "./Components/Admin/UserPosts";
 import EditBook from "./Containers/Admin/Edit";
+import Register from "./Containers/Admin/Register";
+import Logout from "./Components/Admin/Logout";
 
 const Routes = () => {
   return (
@@ -17,6 +19,7 @@ const Routes = () => {
       <Switch>
         <Route path="/" exact component={Auth(Home, null)} />
         <Route path="/login" exact component={Auth(Login, false)} />
+        <Route path="/user/logout" exact component={Auth(Logout, true)} />
         <Route path="/user" exact component={Auth(User, true)} />
         <Route path="/user/add" exact component={Auth(AddReview, true)} />
         <Route
@@ -30,6 +33,7 @@ const Routes = () => {
           component={Auth(UserPosts, true)}
         />
         <Route path="/books/:id" exact component={Auth(BookView, null)} />
+        <Route path="/user/register" exact component={Auth(Register, true)} />
       </Switch>
     </Layout>
   );
